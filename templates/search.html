@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deteksi Phishing</title>
+    <!-- Menambahkan favicon -->
+    <link rel="icon" href="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" type="image/x-icon">
+    <!-- Menghubungkan file CSS eksternal -->
+    <link rel="stylesheet" href="../static/styles_search.css">
+    <script type="text/javascript" src="https://kit.fontawesome.com/e25b852c87.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header berisi logo dan navigasi -->
+    <header class="header">
+        <div class="logo">
+            <!-- Gambar logo untuk Deteksi Phishing -->
+            <img src="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" alt="Logo Deteksi Phishing">
+        </div>
+        <!-- Navigasi utama -->
+        <nav class="nav">
+            <ul>
+                <li><a class="nav-link active" href="/">HOME</a></li>
+                <li><a class="nav-link active" href="/search">SEARCH</a></li>
+                <li><a class="nav-link active" href="/history">HISTORY</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Konten utama -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <h1>Apakah tautan ini aman?</h1>
+            <p>Pindai URL yang ingin Anda kunjungi untuk mendeteksi malware, situs web palsu, dan serangan phishing.</p>
+            <form action="/results" method="GET">
+                <input type="url" name="url" placeholder="Masukkan URL di sini" required pattern="https?://.*">
+                <button type="submit">Lakukan analisis</button>
+            </form>
+            <!-- Teks di bawah kotak pencarian -->
+            <p>Periksa URL situs Web untuk memastikan keasliannya!</p>
+        </div>
+    </main>
+    <!-- Footer berisi logo, dan media sosial -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Gambar logo di footer -->
+            <img src="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" alt="Logo Deteksi Phishing" class="footer-logo">
+            <p>Kurnia Ainun Najah | 2024</p>
+            <!-- Ikon media sosial -->
+            <div class="social-icons">
+                <a href="https://www.facebook.com/KurniaAinunN"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/azkakhaira10388"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/kurnia_ainun2905"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/kurnia-ainun-632528172"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

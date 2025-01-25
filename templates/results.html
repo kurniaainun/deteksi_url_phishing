@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deteksi Phishing</title>
+    <!-- Menambahkan favicon -->
+    <link rel="icon" href="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" type="image/x-icon">
+    <!-- Menghubungkan file CSS eksternal -->
+    <link rel="stylesheet" href="../static/styles_results.css">
+    <script type="text/javascript" src="https://kit.fontawesome.com/e25b852c87.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header berisi logo dan navigasi -->
+    <header class="header">
+        <div class="logo">
+            <img src="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" alt="Logo Deteksi Phishing">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a class="nav-link active" href="/">HOME</a></li>
+                <li><a class="nav-link active" href="/search">SEARCH</a></li>
+                <li><a class="nav-link active" href="/history">HISTORY</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Konten utama -->
+    <main class="main-content">
+        <div class="result-container">
+            <!-- Bagian Skor Keamanan -->
+            <div class="score-section">
+                <h2 class="score {{ 'safe' if score < 30 else 'warning' if score < 60 else 'danger' }}">
+                    {{ score }}/100
+                </h2>
+                <p>Semakin rendah skor, semakin aman URL yang Anda masukkan.</p>
+                <p>Status: 
+                    <strong class="{{ 'safe' if score < 30 else 'warning' if score < 60 else 'danger' }}">
+                        {{ 'Aman' if score < 30 else 'Waspada' if score < 60 else 'Berbahaya' }}
+                    </strong>
+                </p>
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ score }}%; background-color: {{ 'green' if score < 30 else 'orange' if score < 60 else 'red' }};"></div>
+                </div>
+            </div>
+        
+            <!-- Detail URL -->
+            <div class="details-section">
+                <h3>Detail URL:</h3>
+                <p><strong>URL:</strong> {{ url }}</p>
+                <p><strong>Status:</strong> {{ 'Phishing' if score >= 60 else 'Legitimate' }}</p>
+                <p><strong>Tanggal Analisis Terakhir:</strong> {{ analysis_date }}</p>
+            </div>
+        
+            <!-- Bagian Fitur yang Diekstrak -->
+            <div class="features-container">
+                <div class="features-section left">
+                    <h3>Fitur yang Diekstrak (Bagian 1):</h3>
+                    <ul>
+                        {% for feature in features[:features|length//2] %}
+                            <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="features-section right">
+                    <h3>Fitur yang Diekstrak (Bagian 2):</h3>
+                    <ul>
+                        {% for feature in features[features|length//2:] %}
+                            <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>        
+
+        <!-- Form untuk Pindai URL Lain -->
+        <div class="content-wrapper">
+            <h1>Pindai URL Lain</h1>
+            <p>Pindai URL yang ingin Anda kunjungi untuk mendeteksi malware, situs web palsu, dan serangan phishing.</p>
+            <form action="/results" method="GET">
+                <input type="url" name="url" placeholder="Masukkan URL di sini" required pattern="https?://.*">
+                <button type="submit">Lakukan analisis</button>
+            </form>
+        </div>
+
+        <!-- Tombol untuk Riwayat -->
+        <div class="action-section">
+            <a href="/history">
+                <button class="search-button">HISTORI DETEKSI PHISHING</button>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <img src="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" alt="Logo Deteksi Phishing" class="footer-logo">
+            <p>Kurnia Ainun Najah | 2024</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/KurniaAinunN"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/azkakhaira10388"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/kurnia_ainun2905"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/kurnia-ainun-632528172"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

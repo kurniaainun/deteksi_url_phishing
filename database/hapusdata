@@ -1,0 +1,30 @@
+def delete_data(record_id):
+    try:
+        # Connect to the PostgreSQL database
+        conn = psycopg2.connect(
+            dbname="phishing_db",
+            user="postgres",
+            password="Kurnia2905",
+            host="localhost",
+            port="5432"
+        )
+        cursor = conn.cursor()
+
+        # Delete data from the table
+        delete_query = sql.SQL("""
+            DELETE FROM history
+            WHERE id = %s;
+        """)
+        cursor.execute(delete_query, (record_id,))
+
+        # Commit the transaction
+        conn.commit()
+
+    except Exception as e:
+        print(f"Error deleting data: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+
+# Example usage
+delete_data(1)

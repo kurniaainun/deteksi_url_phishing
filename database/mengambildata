@@ -1,0 +1,27 @@
+def fetch_data():
+    try:
+        # Connect to the PostgreSQL database
+        conn = psycopg2.connect(
+            dbname="phishing_db",
+            user="postgres",
+            password="Kurnia2905",
+            host="localhost",
+            port="5432"
+        )
+        cursor = conn.cursor()
+
+        # Retrieve data from the table
+        cursor.execute("SELECT * FROM history;")
+        rows = cursor.fetchall()
+
+        for row in rows:
+            print(row)
+
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+
+# Example usage
+fetch_data()

@@ -1,0 +1,35 @@
+import psycopg2
+from psycopg2 import sql
+
+def update_data(record_id, prediction):
+    try:
+        # Koneksi ke database PostgreSQL
+        conn = psycopg2.connect(
+            dbname="phishing_db",
+            user="postgres",
+            password="Kurnia2905",
+            host="localhost",
+            port="5432"
+        )
+        cursor = conn.cursor()
+
+        # Update data di tabel
+        update_query = sql.SQL("""
+            UPDATE history
+            SET prediction = %s
+            WHERE id = %s;
+        """)
+        cursor.execute(update_query, (prediction, record_id))
+
+        # Menyimpan perubahan
+        conn.commit()
+        print(f"Data dengan id {record_id} berhasil diperbarui.")
+
+    except Exception as e:
+        print(f"Error updating data: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+
+# Contoh penggunaan
+update_data(1, "safe")

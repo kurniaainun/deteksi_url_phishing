@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aplikasi Deteksi Phishing untuk melindungi Anda dari ancaman online">
+    <meta name="author" content="Kurnia Ainun Najah">
+    <title>Histori Deteksi - Deteksi Phishing</title>
+    <!-- Favicon -->
+    <link rel="icon" href="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" type="image/x-icon">
+    <!-- CSS Eksternal -->
+    <link rel="stylesheet" href="../static/styles_history.css">
+    <!-- Ikon FontAwesome -->
+    <script src="https://kit.fontawesome.com/e25b852c87.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header dengan logo dan navigasi -->
+    <header class="header">
+        <div class="logo">
+            <img src="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" alt="Logo Deteksi Phishing" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a class="nav-link" href="/">Home</a></li>
+                <li><a class="nav-link" href="/search">Search</a></li>
+                <li><a class="nav-link active" href="/history">History</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Konten utama -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="title">Histori Deteksi</h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" class="form-control" onkeyup="searchTable()" placeholder="Cari URL atau Prediksi...">
+            </div>
+            <div class="table-container">
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>URL</th>
+                            <th>Prediksi</th>
+                            <th>Tanggal Prediksi</th>
+                            <th>Jumlah Prediksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ record.url }}</td>
+                            <td>{{ record.status }}</td>
+                            <td>{{ record.analysis_date.strftime('%d %B %Y %H:%M:%S') }}</td>
+                            <td>{{ record.detection_count }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" style="text-align: center;">Tidak ada data ditemukan.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+                <p id="noDataMessage" class="no-data-message" style="display: none;">Tidak ada data ditemukan.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <img src="../static/image/BlueWhiteSimpleCyberSecurityLogo11.png" alt="Logo Deteksi Phishing" class="footer-logo">
+            <p>&copy; 2024 Kurnia Ainun Najah</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/KurniaAinunN" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/azkakhaira10388" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/kurnia_ainun2905" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/kurnia-ainun-632528172" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function searchTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.querySelector(".responsive-table tbody");
+            const rows = table.getElementsByTagName("tr");
+            let visibleCount = 0;
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName("td");
+                let match = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = match ? "" : "none";
+                if (match) visibleCount++;
+            }
+
+            // Tampilkan pesan jika tidak ada data
+            document.getElementById("noDataMessage").style.display = visibleCount > 0 ? "none" : "block";
+        }
+    </script>
+</body>
+</html>

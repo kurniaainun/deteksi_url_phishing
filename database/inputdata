@@ -1,0 +1,34 @@
+import psycopg2
+from psycopg2 import sql
+
+def insert_data(url, prediction):
+    try:
+        # Koneksi ke database PostgreSQL
+        conn = psycopg2.connect(
+            dbname="phishing_db",
+            user="postgres",
+            password="Kurnia2905",
+            host="localhost",
+            port="5432"
+        )
+        cursor = conn.cursor()
+
+        # Menyisipkan data ke tabel
+        insert_query = sql.SQL("""
+            INSERT INTO history (url, prediction, created_at)
+            VALUES (%s, %s, NOW());
+        """)
+        cursor.execute(insert_query, (url, prediction))
+
+        # Menyimpan perubahan
+        conn.commit()
+        print("Data berhasil dimasukkan.")
+
+    except Exception as e:
+        print(f"Error inserting data: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+
+# Contoh penggunaan
+insert_data("http://example.com", "phishing")
