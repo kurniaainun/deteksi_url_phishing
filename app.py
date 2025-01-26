@@ -52,7 +52,7 @@ def search():
 def results():
     url = request.args.get("url")
     if not url:
-        return render_template("results.html", error="URL tidak ditemukan. Masukkan URL yang valid.")
+        return render_template("results.html", error="URL tidak ditemukan. Masukkan URL yang benar.")
     
     try:
         # Ekstraksi fitur dari URL menggunakan fungsi generate_data_set
